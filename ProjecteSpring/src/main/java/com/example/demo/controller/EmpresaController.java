@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
-import com.example.demo.bean.EmpresaNotFoundException;
+import com.example.demo.exception.EmpresaNotFoundException;
 
 @RestController
 class EmpresaController {
