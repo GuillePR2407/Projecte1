@@ -4,10 +4,18 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "CUSTOMERS")
 public class Empresa {
 
-    private @Id @GeneratedValue Long id;
+	@Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+	
+	@Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
+	
+	@Column(name = "DESCRIPCION", nullable = false, length = 100)
     private String descripcion;
     
     
