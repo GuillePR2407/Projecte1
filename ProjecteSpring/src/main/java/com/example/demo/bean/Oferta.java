@@ -4,8 +4,6 @@ import java.util.Calendar;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +22,8 @@ public class Oferta {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private long id;
 	    
-	    @Column(name = "STATUS", length = 20, nullable = false)
-	    @Enumerated(EnumType.STRING)
-	    private Status status;
+	 	@Column(name = "STATUS", length = 20, nullable = false)
+	    private String status;
 	    
 	    @Temporal(TemporalType.TIMESTAMP)
 	    @Column(name = "REGIST_DATE", nullable = false)
@@ -37,7 +34,7 @@ public class Oferta {
 
 	    Oferta() {}
 		
-	    Oferta(long id, Status status, Calendar registDate, Empresa empresa) {
+	    Oferta(long id, String status, Calendar registDate, Empresa empresa) {
 			super();
 			this.id = id;
 			this.status = status;
@@ -53,11 +50,11 @@ public class Oferta {
 			this.id = id;
 		}
 
-		public Status getStatus() {
+		public String getStatus() {
 			return status;
 		}
 
-		public void setStatus(Status status) {
+		public void setStatus(String status) {
 			this.status = status;
 		}
 
