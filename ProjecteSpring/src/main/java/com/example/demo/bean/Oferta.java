@@ -1,8 +1,19 @@
 package com.example.demo.bean;
 
 import java.util.Calendar;
-import jakarta.persistence.*;
-import jakarta.transaction.Status;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 @Entity
@@ -33,6 +44,37 @@ public class Oferta {
 			this.registDate = registDate;
 			this.empresa = empresa;
 		}
-	    
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		public Status getStatus() {
+			return status;
+		}
+
+		public void setStatus(Status status) {
+			this.status = status;
+		}
+
+		public Calendar getRegistDate() {
+			return registDate;
+		}
+
+		public void setRegistDate(Calendar registDate) {
+			this.registDate = registDate;
+		}
+
+		public Empresa getEmpresa() {
+			return empresa;
+		}
+
+		public void setEmpresa(Empresa empresa) {
+			this.empresa = empresa;
+		}
 	    
 }
