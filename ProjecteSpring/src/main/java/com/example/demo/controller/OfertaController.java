@@ -7,7 +7,7 @@ import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.OfertaRepository;
-import com.example.demo.exception.EmpresaNotFoundException;
+import com.example.demo.exception.OfertaNotFoundException;
 
 @RestController
 class OfertaController {
@@ -34,7 +34,7 @@ class OfertaController {
     List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long idEmpresa) {
         // Verificar si la empresa existe
         Empresa empresa = empresaRepository.findById(idEmpresa)
-            .orElseThrow(() -> new EmpresaNotFoundException(idEmpresa));
+            .orElseThrow(() -> new OfertaNotFoundException(idEmpresa));
         
         // Obtener las ofertas pertenecientes a la empresa
         return ofertaRepository.findByEmpresa(empresa);
