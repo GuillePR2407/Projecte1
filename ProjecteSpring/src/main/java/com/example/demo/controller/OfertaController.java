@@ -46,18 +46,20 @@ class OfertaController {
       .orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa().getId()));
   }
 
-  @PutMapping("/empresas/{id}")
-  Empresa replaceEmpresa(@RequestBody Empresa newEmpresa, @PathVariable Long id) {
+  @PutMapping("/ofertas/{id}")
+  Oferta replaceOferta(@RequestBody Oferta newOferta, @PathVariable Long id) {
     
     return repository.findById(id)
-      .map(empresa -> {
-        empresa.setNombre(newEmpresa.getNombre());
-        empresa.setDescripcion(newEmpresa.getDescripcion());
-        return repository.save(empresa);
+      .map(oferta -> {
+        oferta.setNom(newOferta.getNom());
+        oferta.setDescripcio(newOferta.getDescripcio());
+        oferta.setStatus(newOferta.getStatus());
+        oferta.setRegistDate(newOferta.getRegistDate());
+        return repository.save(oferta);
       })
       .orElseGet(() -> {
-        newEmpresa.setId(id);
-        return repository.save(newEmpresa);
+        newOferta.setId(id);
+        return repository.save(newOferta);
       });
   }
 

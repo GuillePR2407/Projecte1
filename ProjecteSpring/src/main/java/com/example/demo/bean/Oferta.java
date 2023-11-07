@@ -39,6 +39,8 @@ public class Oferta {
     private Empresa empresa;
 
 	
+    Oferta(){}
+    
     Oferta(String status, String nom, String descripcio, Calendar registDate, Empresa empresa) {
 		super();
 		this.status = status;
