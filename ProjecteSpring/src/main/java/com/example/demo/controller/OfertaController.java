@@ -19,52 +19,49 @@ import com.example.demo.exception.EmpresaNotFoundException;
 @RestController
 class OfertaController {
 
-  private final OfertaRepository repository;
+	private final OfertaRepository repository;
 
-  OfertaController(OfertaRepository repository) {
-    this.repository = repository;
-  }
-  
+	OfertaController(OfertaRepository repository) {
+		this.repository = repository;
+	}
 
-  @GetMapping("/ofertas")
-  List<Oferta> all() {
-    return repository.findAll();
-  }
-  // end::get-aggregate-root[]
+	@GetMapping("/ofertas")
+	List<Oferta> all() {
+		return repository.findAll();
+	}
+	// end::get-aggregate-root[]
 
-  @PostMapping("/ofertas")
-  Oferta newOferta(@RequestBody Oferta newOferta) {
-    return repository.save(newOferta);
-  }
+	@PostMapping("/ofertas")
+	Oferta newOferta(@RequestBody Oferta newOferta) {
+		return repository.save(newOferta);
+	}
 
-  // Single item
-  
-  @GetMapping("/ofertas/{id}")
-  Oferta one(@RequestBody Oferta newOferta, @PathVariable Long id) {
-    
-    return repository.findById( newOferta.getEmpresa().getId())
-      .orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa().getId()));
-  }
+	// Single item
 
-  @PutMapping("/ofertas/{id}")
-  Oferta replaceOferta(@RequestBody Oferta newOferta, @PathVariable Long id) {
-    
-    return repository.findById(id)
-      .map(oferta -> {
-        oferta.setNom(newOferta.getNom());
-        oferta.setDescripcio(newOferta.getDescripcio());
-        oferta.setStatus(newOferta.getStatus());
-        oferta.setRegistDate(newOferta.getRegistDate());
-        return repository.save(oferta);
-      })
-      .orElseGet(() -> {
-        newOferta.setId(id);
-        return repository.save(newOferta);
-      });
-  }
+	@GetMapping("/empresas/{id}/ofertas")
+	Oferta empresesOfertas(@RequestBody Oferta newOferta, @PathVariable Long id) {
 
-  @DeleteMapping("/ofertas/{id}")
-  void deleteOferta(@PathVariable Long id) {
-    repository.deleteById(id);
-  }
+		return repository.findById(newOferta.getEmpresa().getId())
+				.orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa().getId()));
+	}
+
+	@PutMapping("/ofertas/{id}")
+	Oferta replaceOferta(@RequestBody Oferta newOferta, @PathVariable Long id) {
+
+		return repository.findById(id).map(oferta -> {
+			oferta.setNom(newOferta.getNom());
+			oferta.setDescripcio(newOferta.getDescripcio());
+			oferta.setStatus(newOferta.getStatus());
+			oferta.setRegistDate(newOferta.getRegistDate());
+			return repository.save(oferta);
+		}).orElseGet(() -> {
+			newOferta.setId(id);
+			return repository.save(newOferta);
+		});
+	}
+
+	@DeleteMapping("/ofertas/{id}")
+	void deleteOferta(@PathVariable Long id) {
+		repository.deleteById(id);
+	}
 }
