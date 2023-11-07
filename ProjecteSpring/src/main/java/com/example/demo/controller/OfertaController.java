@@ -31,8 +31,8 @@ class OfertaController {
     }
 
     @GetMapping("/empresas/{empresaId}/ofertas")
-    List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long empresaId) {
-        // Obtener las ofertas pertenecientes a la empresa con la ID proporcionada
+	List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long empresaId) {   
+        // Obtener las ofertas pertenecientes a la empresa
         return ofertaRepository.findByEmpresaId(empresaId);
     }
 
