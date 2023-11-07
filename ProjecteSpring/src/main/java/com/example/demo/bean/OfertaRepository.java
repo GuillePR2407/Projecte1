@@ -1,7 +1,11 @@
 package com.example.demo.bean;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OfertaRepository extends JpaRepository<Oferta, Long> {
 
+public interface OfertaRepository extends JpaRepository<Oferta, Long> {
+    List<Oferta> findByEmpresaId(Long empresaId);
+    List<Oferta> findByEmpresa(Empresa empresa);
 }
