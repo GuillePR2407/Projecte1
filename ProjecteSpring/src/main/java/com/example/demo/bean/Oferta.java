@@ -35,19 +35,19 @@ public class Oferta {
     @Column(name = "REGIST_DATE", nullable = false)
     private Calendar registDate;
     
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Empresa empresa;
+    @Column(name = "ID_EMPRESA", nullable = false)
+    private Long empresaId;
 
 	
     Oferta(){}
     
-    Oferta(String status, String nom, String descripcio, Calendar registDate, Empresa empresa) {
+    Oferta(String status, String nom, String descripcio, Calendar registDate, Long empresaId) {
 		super();
 		this.status = status;
 		this.nom = nom;
 		this.descripcio = descripcio;
 		this.registDate = registDate;
-		this.empresa = empresa;
+		this.empresaId = empresaId;
 	}
 
 
@@ -101,13 +101,13 @@ public class Oferta {
 	}
 
 
-	public Empresa getEmpresa() {
-		return empresa;
+	public Long getidEmpresa() {
+		return empresaId;
 	}
 
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setidEmpresa(Long EmpresaId) {
+		this.empresaId = EmpresaId;
 	}
         
 }

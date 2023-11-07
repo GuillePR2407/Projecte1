@@ -1,23 +1,24 @@
 package com.example.demo.bean;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CUSTOMERS")
+@Table(name = "EMPRESAS")
 public class Empresa {
 
 	@Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 	
 	@Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
 	
 	@Column(name = "DESCRIPCION", nullable = false, length = 100)
-    private String descripcion;
-    
+    private String descripcion;    
     
     Empresa() {}
     

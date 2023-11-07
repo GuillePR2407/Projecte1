@@ -30,14 +30,10 @@ class OfertaController {
         return ofertaRepository.save(newOferta);
     }
 
-    @GetMapping("/empresas/{idEmpresa}/ofertas")
-    List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long idEmpresa) {
-        // Verificar si la empresa existe
-        Empresa empresa = empresaRepository.findById(idEmpresa)
-            .orElseThrow(() -> new EmpresaNotFoundException(idEmpresa));
-        
-        // Obtener las ofertas pertenecientes a la empresa
-        return ofertaRepository.findByEmpresa(empresa);
+    @GetMapping("/empresas/{empresaId}/ofertas")
+    List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long empresaId) {
+        // Obtener las ofertas pertenecientes a la empresa con la ID proporcionada
+        return ofertaRepository.findByEmpresaId(empresaId);
     }
 
     @PutMapping("/ofertas/{id}")

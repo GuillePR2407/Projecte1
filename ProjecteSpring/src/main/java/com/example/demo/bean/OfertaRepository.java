@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface OfertaRepository extends JpaRepository<Oferta, Long> {
-    List<Oferta> findByEmpresaId(Long empresaId);
-    List<Oferta> findByEmpresa(Empresa empresa);
+    List<Oferta> findByEmpresaId(Long EmpresaId);
 }
