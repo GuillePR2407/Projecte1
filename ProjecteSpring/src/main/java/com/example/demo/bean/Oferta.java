@@ -17,61 +17,95 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name="OFERTAS")
 public class Oferta {
-	 @Id
-	    @Column(name="ID")
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private long id;
-	    
-	 	@Column(name = "STATUS", length = 20, nullable = false)
-	    private String status;
-	    
-	    @Temporal(TemporalType.TIMESTAMP)
-	    @Column(name = "REGIST_DATE", nullable = false)
-	    private Calendar registDate;
-	    
-	    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	    private Empresa empresa;
+	@Id
+    @Column(name="ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+	 
+	@Column(name = "STATUS", length = 20, nullable = false)
+	private String status;
+	 
+ 	@Column(name = "NOM", length = 20, nullable = false)
+    private String nom;
+ 	
+ 	@Column(name = "DESCRIPCIO", length = 20, nullable = false)
+    private String descripcio;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "REGIST_DATE", nullable = false)
+    private Calendar registDate;
+    
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Empresa empresa;
 
-	    Oferta() {}
-		
-	    Oferta(long id, String status, Calendar registDate, Empresa empresa) {
-			super();
-			this.id = id;
-			this.status = status;
-			this.registDate = registDate;
-			this.empresa = empresa;
-		}
+	
+    Oferta(String status, String nom, String descripcio, Calendar registDate, Empresa empresa) {
+		super();
+		this.status = status;
+		this.nom = nom;
+		this.descripcio = descripcio;
+		this.registDate = registDate;
+		this.empresa = empresa;
+	}
 
-		public long getId() {
-			return id;
-		}
 
-		public void setId(long id) {
-			this.id = id;
-		}
+	public long getId() {
+		return id;
+	}
 
-		public String getStatus() {
-			return status;
-		}
 
-		public void setStatus(String status) {
-			this.status = status;
-		}
+	public void setId(long id) {
+		this.id = id;
+	}
 
-		public Calendar getRegistDate() {
-			return registDate;
-		}
 
-		public void setRegistDate(Calendar registDate) {
-			this.registDate = registDate;
-		}
+	public String getStatus() {
+		return status;
+	}
 
-		public Empresa getEmpresa() {
-			return empresa;
-		}
 
-		public void setEmpresa(Empresa empresa) {
-			this.empresa = empresa;
-		}
-	    
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getNom() {
+		return nom;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public String getDescripcio() {
+		return descripcio;
+	}
+
+
+	public void setDescripcio(String descripcio) {
+		this.descripcio = descripcio;
+	}
+
+
+	public Calendar getRegistDate() {
+		return registDate;
+	}
+
+
+	public void setRegistDate(Calendar registDate) {
+		this.registDate = registDate;
+	}
+
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+        
 }
