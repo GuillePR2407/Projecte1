@@ -1,6 +1,7 @@
 package com.example.demo.bean;
 
 import java.util.Calendar;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -35,6 +37,8 @@ public class Oferta {
     @Column(name = "REGIST_DATE", nullable = false)
     private Calendar registDate;
     
+    //@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name = "ID_EMPRESA", nullable = false)
     @Column(name = "ID_EMPRESA", nullable = false)
     private Long empresaId;
 
@@ -42,7 +46,6 @@ public class Oferta {
     Oferta(){}
     
     Oferta(String status, String nom, String descripcio, Calendar registDate, Long empresaId) {
-		super();
 		this.status = status;
 		this.nom = nom;
 		this.descripcio = descripcio;
