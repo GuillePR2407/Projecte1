@@ -12,29 +12,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
-import com.example.demo.bean.OfertaController;
+import com.example.demo.bean.Oferta;
+import com.example.demo.bean.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
 
 @RestController
 class EmpresaController {
 
-	private final EmpresaRepository repository;
+	private final EmpresaRepository empresaRepository;
+	private final OfertaRepository ofertaRepository;
 
-	EmpresaController(EmpresaRepository repository) {
-		this.repository = repository;
+	EmpresaController(EmpresaRepository empresaRepository, OfertaRepository ofertaRepository ) {
+		this.empresaRepository = empresaRepository;
+		this.ofertaRepository = ofertaRepository;
 	}
 
 	// Aggregate root
 	// tag::get-aggregate-root[]
 	@GetMapping("/empresas")
 	List<Empresa> all() {
-		return repository.findAll();
+		return empresaRepository.findAll();
 	}
 	// end::get-aggregate-root[]
 
 	@PostMapping("/empresas")
 	Empresa newEmpresa(@RequestBody Empresa newEmpresa) {
-		return repository.save(newEmpresa);
+		return empresaRepository.save(newEmpresa);
 	}
 
 	// Single item
@@ -42,25 +45,37 @@ class EmpresaController {
 	@GetMapping("/empresas/{id}")
 	Empresa one(@PathVariable Long id) {
 
-		return repository.findById(id).orElseThrow(() -> new EmpresaNotFoundException(id));
+		return empresaRepository.findById(id).orElseThrow(() -> new EmpresaNotFoundException(id));
 	}
 
 	@PutMapping("/empresas/{id}")
 	Empresa replaceEmpresa(@RequestBody Empresa newEmpresa, @PathVariable Long id) {
 
-		return repository.findById(id).map(empresa -> {
+		return empresaRepository.findById(id).map(empresa -> {
 			empresa.setNombre(newEmpresa.getNombre());
 			empresa.setDescripcion(newEmpresa.getDescripcion());
-			return repository.save(empresa);
+			return empresaRepository.save(empresa);
 		}).orElseGet(() -> {
 			newEmpresa.setId(id);
-			return repository.save(newEmpresa);
+			return empresaRepository.save(newEmpresa);
 		});
 	}
 
 	@DeleteMapping("/empresas/{id}")
 	void deleteEmpresa(@PathVariable Long id) {
+		try {
+			if (!empresaTieneOferta(id)) {
+				empresaRepository.deleteById(id);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		repository.deleteById(id);
 	}
+	public Boolean empresaTieneOferta(Long empresaId) {   
+    	List<Oferta> a = ofertaRepository.findByEmpresaId(empresaId);
+    	if (a.isEmpty()) return false;
+        return true;
+    }
 }

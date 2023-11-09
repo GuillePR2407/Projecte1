@@ -36,7 +36,7 @@ class OfertaController {
         // Obtener las ofertas pertenecientes a la empresa
         return ofertaRepository.findByEmpresaId(empresaId);
     }
-
+    
     @PutMapping("/ofertas/{id}")
     Oferta replaceOferta(@RequestBody Oferta newOferta, @PathVariable Long id) {
         return ofertaRepository.findById(id).map(oferta -> {
