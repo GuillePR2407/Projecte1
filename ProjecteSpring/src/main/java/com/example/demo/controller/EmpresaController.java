@@ -15,6 +15,7 @@ import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
+import com.example.demo.exception.EmpresaCantDeleteException;
 
 @RestController
 class EmpresaController {
@@ -63,13 +64,10 @@ class EmpresaController {
 
 	@DeleteMapping("/empresas/{id}")
 	void deleteEmpresa(@PathVariable Long id) {
-		try {
-			if (!empresaTieneOferta(id)) {
-				empresaRepository.deleteById(id);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!empresaTieneOferta(id)) {
+			empresaRepository.deleteById(id);
+		} else {
+			throw new EmpresaCantDeleteException(id);
 		}
 		
 	}
