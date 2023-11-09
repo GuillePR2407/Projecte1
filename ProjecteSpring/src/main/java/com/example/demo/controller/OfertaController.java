@@ -27,6 +27,7 @@ class OfertaController {
 
     @PostMapping("/ofertas")
     Oferta newOferta(@RequestBody Oferta newOferta) {
+    	empresaRepository.findById(newOferta.getidEmpresa()).orElseThrow(() -> new EmpresaNotFoundException(newOferta.getidEmpresa()));
         return ofertaRepository.save(newOferta);
     }
 
@@ -39,10 +40,12 @@ class OfertaController {
     @PutMapping("/ofertas/{id}")
     Oferta replaceOferta(@RequestBody Oferta newOferta, @PathVariable Long id) {
         return ofertaRepository.findById(id).map(oferta -> {
+        	empresaRepository.findById(newOferta.getidEmpresa()).orElseThrow(() -> new EmpresaNotFoundException(newOferta.getidEmpresa()));
             oferta.setNom(newOferta.getNom());
             oferta.setDescripcio(newOferta.getDescripcio());
             oferta.setStatus(newOferta.getStatus());
             oferta.setRegistDate(newOferta.getRegistDate());
+            oferta.setidEmpresa(newOferta.getidEmpresa());
             return ofertaRepository.save(oferta);
         }).orElseGet(() -> {
             newOferta.setId(id);
