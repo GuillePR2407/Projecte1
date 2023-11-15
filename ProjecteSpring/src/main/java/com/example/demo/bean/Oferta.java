@@ -2,7 +2,6 @@ package com.example.demo.bean;
 
 import java.util.Calendar;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,49 +16,48 @@ import jakarta.persistence.TemporalType;
 
 
 @Entity
-@Table(name="OFERTAS")
+@Table(name = "OFERTAS")
 public class Oferta {
-	@Id
-    @Column(name="ID")
+
+    @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-	 
-	@Column(name = "STATUS", length = 20, nullable = false)
-	private String status;
-	 
- 	@Column(name = "NOM", length = 20, nullable = false)
+    private Long id;
+
+    @Column(name = "STATUS", length = 20, nullable = false)
+    private String status;
+
+    @Column(name = "NOM", length = 20, nullable = false)
     private String nom;
- 	
- 	@Column(name = "DESCRIPCIO", length = 20, nullable = false)
+
+    @Column(name = "DESCRIPCIO", length = 20, nullable = false)
     private String descripcio;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "REGIST_DATE", nullable = false)
     private Calendar registDate;
-    
-    //@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "ID_EMPRESA", nullable = false)
-    @Column(name = "ID_EMPRESA", nullable = false)
-    private Long empresaId;
 
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "EMPRESA", nullable = false)
+    private Empresa empresa;
 	
     Oferta(){}
-    
-    Oferta(String status, String nom, String descripcio, Calendar registDate, Long empresaId) {
+
+	public Oferta(String status, String nom, String descripcio, Calendar registDate, Empresa empresa) {
+		super();
 		this.status = status;
 		this.nom = nom;
 		this.descripcio = descripcio;
 		this.registDate = registDate;
-		this.empresaId = empresaId;
+		this.empresa = empresa;
 	}
 
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -104,13 +102,13 @@ public class Oferta {
 	}
 
 
-	public Long getidEmpresa() {
-		return empresaId;
+	public Long getEmpresa() {
+		return empresa.getId();
 	}
 
 
-	public void setidEmpresa(Long EmpresaId) {
-		this.empresaId = EmpresaId;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
-        
+     
 }

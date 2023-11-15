@@ -8,6 +8,7 @@ import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
+import com.example.demo.exception.OfertaNotFoundException;
 
 @RestController
 class OfertaController {
@@ -27,28 +28,41 @@ class OfertaController {
 
     @PostMapping("/ofertas")
     Oferta newOferta(@RequestBody Oferta newOferta) {
-    	empresaRepository.findById(newOferta.getidEmpresa()).orElseThrow(() -> new EmpresaNotFoundException(newOferta.getidEmpresa()));
+        Empresa empresa = empresaRepository.findById(newOferta.getEmpresa())
+                .orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa()));
+
+        newOferta.setEmpresa(empresa);
         return ofertaRepository.save(newOferta);
+    }
+    
+    @GetMapping("/ofertas/{id}")
+    Oferta one(@PathVariable Long id) {
+        return ofertaRepository.findById(id).orElseThrow(() -> new OfertaNotFoundException(id));
     }
 
     @GetMapping("/empresas/{empresaId}/ofertas")
-	List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long empresaId) {   
-        // Obtener las ofertas pertenecientes a la empresa
+    List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long empresaId) {
         return ofertaRepository.findByEmpresaId(empresaId);
     }
-    
+
     @PutMapping("/ofertas/{id}")
     Oferta replaceOferta(@RequestBody Oferta newOferta, @PathVariable Long id) {
         return ofertaRepository.findById(id).map(oferta -> {
-        	empresaRepository.findById(newOferta.getidEmpresa()).orElseThrow(() -> new EmpresaNotFoundException(newOferta.getidEmpresa()));
+            Empresa empresa = empresaRepository.findById(newOferta.getEmpresa())
+                    .orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa()));
+
             oferta.setNom(newOferta.getNom());
             oferta.setDescripcio(newOferta.getDescripcio());
             oferta.setStatus(newOferta.getStatus());
             oferta.setRegistDate(newOferta.getRegistDate());
-            oferta.setidEmpresa(newOferta.getidEmpresa());
+            oferta.setEmpresa(empresa);
             return ofertaRepository.save(oferta);
         }).orElseGet(() -> {
             newOferta.setId(id);
+            Empresa empresa = empresaRepository.findById(newOferta.getEmpresa())
+                    .orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa()));
+
+            newOferta.setEmpresa(empresa);
             return ofertaRepository.save(newOferta);
         });
     }
@@ -58,3 +72,4 @@ class OfertaController {
         ofertaRepository.deleteById(id);
     }
 }
+
