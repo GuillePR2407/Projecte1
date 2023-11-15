@@ -15,6 +15,7 @@ import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
+import com.example.demo.exception.EmpresaCantDeleteException;
 
 @RestController
 class EmpresaController {
@@ -61,8 +62,7 @@ class EmpresaController {
                 empresaRepository.deleteById(id);
             }
         } catch (Exception e) {
-            // Handle the exception
-            e.printStackTrace();
+        	throw new EmpresaCantDeleteException(id);
         }
     }
 
