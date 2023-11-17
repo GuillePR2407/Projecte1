@@ -57,12 +57,12 @@ class EmpresaController {
 
     @DeleteMapping("/empresas/{id}")
     void deleteEmpresa(@PathVariable Long id) {
-        try {
+       try {
             if (!empresaTieneOferta(id)) {
                 empresaRepository.deleteById(id);
             }
-        } catch (Exception e) {
-        	throw new EmpresaCantDeleteException(id);
+        } catch (Exception e) {   	
+            throw new EmpresaCantDeleteException(id);
         }
     }
 

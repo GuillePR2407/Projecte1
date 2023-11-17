@@ -37,7 +37,7 @@ public class Oferta {
     @Column(name = "REGIST_DATE", nullable = false)
     private Calendar registDate;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "EMPRESA", nullable = false)
     private Empresa empresa;
 	
