@@ -1,16 +1,15 @@
 package com.example.demo.test;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.OfertaRepository;
 import com.example.demo.service.OfertaService;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -52,8 +51,8 @@ public class OfertaServiceTest {
 
     @Test
     public void testGetAllOfertas() {
-        Empresa empresa;
-		// Configurar el comportamiento esperado del repositorio de oferta
+        Empresa empresa = new Empresa("Empresa de prueba", "Descripción de la empresa de prueba");
+        // Configurar el comportamiento esperado del repositorio de oferta
         Oferta oferta1 = new Oferta("Activa", "Oferta 1", "Descripción 1", Calendar.getInstance(), empresa);
         Oferta oferta2 = new Oferta("Inactiva", "Oferta 2", "Descripción 2", Calendar.getInstance(), empresa);
         when(ofertaRepository.findAll()).thenReturn(Arrays.asList(oferta1, oferta2));
