@@ -1,14 +1,16 @@
 package com.example.demo.test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 public class EmpresaRepositoryTest {
@@ -17,22 +19,41 @@ public class EmpresaRepositoryTest {
     private EmpresaRepository empresaRepository;
 
     @Test
-    public void testSaveAndFindById() {
-        // Crear una empresa para la prueba
-        Empresa empresa = new Empresa("Empresa de prueba", "Descripción de la empresa de prueba");
+    @DirtiesContext
+    public void testGuardarYRecuperarEmpresa() {
+        // Crear una nueva empresa
+        Empresa empresa = new Empresa("NombreEmpresa", "DescripciónEmpresa");
 
         // Guardar la empresa en la base de datos
-        empresaRepository.save(empresa);
+        empresa = empresaRepository.save(empresa);
 
-        // Buscar la empresa por ID
-        Empresa retrievedEmpresa = empresaRepository.findById(empresa.getId()).orElse(null);
+        // Recuperar la empresa por ID
+        Long empresaId = empresa.getId();
+        Empresa empresaRecuperada = empresaRepository.findById(empresaId).orElse(null);
 
-        // Verificar que la empresa se haya guardado correctamente y se pueda recuperar
-        assertNotNull(retrievedEmpresa);
-        assertEquals("Empresa de prueba", retrievedEmpresa.getNombre());
-        assertEquals("Descripción de la empresa de prueba", retrievedEmpresa.getDescripcion());
-        // Agregar más verificaciones según sea necesario
+        // Verificar que la empresa recuperada no es nula
+        assertNotNull(empresaRecuperada);
+
+        // Verificar que los campos coinciden
+        assertEquals("NombreEmpresa", empresaRecuperada.getNombre());
+        assertEquals("DescripciónEmpresa", empresaRecuperada.getDescripcion());
     }
 
-    // Agregar más pruebas según sea necesario
+    @Test
+    @DirtiesContext
+    public void testObtenerTodasLasEmpresas() {
+        // Crear empresas de prueba
+        Empresa empresa1 = new Empresa("Empresa1", "Descripción1");
+        Empresa empresa2 = new Empresa("Empresa2", "Descripción2");
+
+        // Guardar las empresas en la base de datos
+        empresaRepository.save(empresa1);
+        empresaRepository.save(empresa2);
+
+        // Obtener todas las empresas
+        List<Empresa> empresas = empresaRepository.findAll();
+
+        // Verificar que se recuperaron las dos empresas
+        assertEquals(2, empresas.size());
+    }
 }
