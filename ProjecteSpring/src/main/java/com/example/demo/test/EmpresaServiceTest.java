@@ -22,7 +22,6 @@ public class EmpresaServiceTest {
     @MockBean
     private EmpresaRepository empresaRepository;
 
-    // Inject the EmpresaService with the mock repository
     private final EmpresaService empresaService = new EmpresaService(empresaRepository);
 
     @Test
@@ -73,12 +72,12 @@ public class EmpresaServiceTest {
         when(empresaRepository.findById(empresaId)).thenReturn(Optional.of(empresa));
 
         // Act
-        Empresa foundEmpresa = empresaService.getEmpresaById(empresaId);
+        Optional<Empresa> foundEmpresa = empresaService.getEmpresaById(empresaId);
 
         // Assert
-        assertNotNull(foundEmpresa);
-        assertEquals("NombreEmpresa", foundEmpresa.getNombre());
-        assertEquals("DescripciónEmpresa", foundEmpresa.getDescripcion());
+        assertTrue(foundEmpresa.isPresent());
+        assertEquals("NombreEmpresa", foundEmpresa.get().getNombre());
+        assertEquals("DescripciónEmpresa", foundEmpresa.get().getDescripcion());
 
         // Verify that the findById method was called once
         verify(empresaRepository, times(1)).findById(empresaId);

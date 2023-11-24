@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Empresa;
@@ -13,6 +14,7 @@ public class EmpresaService {
 
     private final EmpresaRepository empresaRepository;
 
+    @Autowired
     public EmpresaService(EmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
     }
@@ -25,15 +27,11 @@ public class EmpresaService {
         return empresaRepository.findAll();
     }
 
-    public Empresa getEmpresaById(Long empresaId) {
-        Optional<Empresa> optionalEmpresa = empresaRepository.findById(empresaId);
-        return optionalEmpresa.orElse(null);
+    public Optional<Empresa> getEmpresaById(Long empresaId) {
+        return empresaRepository.findById(empresaId);
     }
 
-	public void deleteEmpresaById(Long empresaId) {
-		empresaRepository.deleteById(empresaId);
-	}
-
-    // Otros métodos de servicio según sea necesario
+    public void deleteEmpresaById(Long empresaId) {
+        empresaRepository.deleteById(empresaId);
+    }
 }
-
