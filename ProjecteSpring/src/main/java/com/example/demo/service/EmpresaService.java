@@ -14,7 +14,6 @@ public class EmpresaService {
 
     private final EmpresaRepository empresaRepository;
 
-    @Autowired
     public EmpresaService(EmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
     }
