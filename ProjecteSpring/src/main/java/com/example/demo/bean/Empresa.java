@@ -35,7 +35,7 @@ public class Empresa {
         oferta.setEmpresa(null);
     }
    
-    Empresa() {}
+    public Empresa() {}
     
 	public Empresa(String nombre, String descripcion) {
 		super();

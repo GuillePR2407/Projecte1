@@ -41,7 +41,7 @@ public class Oferta {
     @JoinColumn(name = "EMPRESA", nullable = false)
     private Empresa empresa;
 	
-    Oferta(){}
+    public Oferta(){}
 
 	public Oferta(String status, String nom, String descripcio, Calendar registDate, Empresa empresa) {
 		super();

@@ -22,7 +22,7 @@ public class OfertaRepositoryTest {
 
     @Test
     public void testSaveAndFindById() {
-        Empresa empresa;
+        Empresa empresa = new Empresa();
 		// Crear una oferta para la prueba
         Oferta oferta = new Oferta("Activa", "Oferta de prueba", "Descripción de prueba", Calendar.getInstance(), empresa);
 
@@ -41,7 +41,7 @@ public class OfertaRepositoryTest {
 
     @Test
     public void testFindByEmpresaId() {
-        Empresa empresa;
+    	Empresa empresa = new Empresa();
 		// Crear ofertas de prueba asociadas a una empresa específica
         Oferta oferta1 = new Oferta("Activa", "Oferta 1", "Descripción 1", Calendar.getInstance(), empresa);
         Oferta oferta2 = new Oferta("Inactiva", "Oferta 2", "Descripción 2", Calendar.getInstance(), empresa);

@@ -7,6 +7,7 @@ import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.OfertaRepository;
+import com.example.demo.exception.EmpresaNotFoundException;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class OfertaService {
 
     public Oferta createOferta(Oferta newOferta) {
         Empresa empresa = empresaRepository.findById(newOferta.getEmpresa())
-                .orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa()));
+        		.orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa()));
 
         newOferta.setEmpresa(empresa);
         return ofertaRepository.save(newOferta);
