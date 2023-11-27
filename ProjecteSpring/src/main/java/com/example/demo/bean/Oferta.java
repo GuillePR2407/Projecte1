@@ -15,8 +15,7 @@ public class Oferta {
     private Long id;
 
     @Column(name = "STATUS", length = 20, nullable = false)
-    private String status;
-
+    private Status status;
     @Column(name = "NOM", length = 20, nullable = false)
     private String nom;
 
@@ -36,7 +35,7 @@ public class Oferta {
 	
     public Oferta(){}
 
-	public Oferta(String status, String nom, String descripcio, Sector sector, Calendar registDate, Empresa empresa) {
+	public Oferta(Status status, String nom, String descripcio, Sector sector, Calendar registDate, Empresa empresa) {
 		super();
 		this.status = status;
 		this.nom = nom;
@@ -56,12 +55,12 @@ public class Oferta {
 	}
 
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 

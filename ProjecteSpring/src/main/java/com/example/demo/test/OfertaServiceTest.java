@@ -34,7 +34,7 @@ public class OfertaServiceTest {
         when(empresaRepository.findById(Mockito.anyLong())).thenReturn(java.util.Optional.of(empresa));
 
         // Configurar el comportamiento esperado del repositorio de oferta
-        Oferta oferta = new Oferta("Activa", "Oferta de prueba", "Descripción de prueba", Sector.DAM, Calendar.getInstance(), empresa);
+        Oferta oferta = new Oferta(Status.ACTIVA, "Oferta de prueba", "Descripción de prueba", Sector.DAM, Calendar.getInstance(), empresa);
         when(ofertaRepository.save(Mockito.any(Oferta.class))).thenReturn(oferta);
 
         // Llamar al método del servicio
@@ -50,8 +50,8 @@ public class OfertaServiceTest {
     public void testGetAllOfertas() {
         Empresa empresa = new Empresa("Empresa de prueba", "Descripción de la empresa de prueba");
         // Configurar el comportamiento esperado del repositorio de oferta
-        Oferta oferta1 = new Oferta("Activa", "Oferta 1", "Descripción 1", Sector.DAM, Calendar.getInstance(), empresa);
-        Oferta oferta2 = new Oferta("Inactiva", "Oferta 2", "Descripción 2", Sector.DAW, Calendar.getInstance(), empresa);
+        Oferta oferta1 = new Oferta(Status.ACTIVA, "Oferta 1", "Descripción 1", Sector.DAM, Calendar.getInstance(), empresa);
+        Oferta oferta2 = new Oferta(Status.INACTIVA, "Oferta 2", "Descripción 2", Sector.DAW, Calendar.getInstance(), empresa);
         when(ofertaRepository.findAll()).thenReturn(Arrays.asList(oferta1, oferta2));
 
         // Llamar al método del servicio

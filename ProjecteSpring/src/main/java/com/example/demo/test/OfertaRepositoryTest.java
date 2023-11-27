@@ -29,8 +29,8 @@ public class OfertaRepositoryTest {
         empresa = empresaRepository.save(empresa);
 
         // Crear ofertas asociadas a la empresa
-        Oferta oferta1 = new Oferta("Activa", "Oferta1", "Descripción1", Sector.DAM, Calendar.getInstance(), empresa);
-        Oferta oferta2 = new Oferta("Inactiva", "Oferta2", "Descripción2", Sector.DAW, Calendar.getInstance(), empresa);
+        Oferta oferta1 = new Oferta(Status.ACTIVA, "Oferta1", "Descripción1", Sector.DAM, Calendar.getInstance(), empresa);
+        Oferta oferta2 = new Oferta(Status.INACTIVA, "Oferta2", "Descripción2", Sector.DAW, Calendar.getInstance(), empresa);
         ofertaRepository.save(oferta1);
         ofertaRepository.save(oferta2);
 
