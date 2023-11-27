@@ -22,6 +22,9 @@ public class Oferta {
 
     @Column(name = "DESCRIPCIO", length = 20, nullable = false)
     private String descripcio;
+    
+    @Column(name = "Sector", length = 20, nullable = false)
+    private String sector;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "REGIST_DATE", nullable = false)
@@ -33,11 +36,12 @@ public class Oferta {
 	
     public Oferta(){}
 
-	public Oferta(String status, String nom, String descripcio, Calendar registDate, Empresa empresa) {
+	public Oferta(String status, String nom, String descripcio, String sector, Calendar registDate, Empresa empresa) {
 		super();
 		this.status = status;
 		this.nom = nom;
 		this.descripcio = descripcio;
+		this.sector = sector;
 		this.registDate = registDate;
 		this.empresa = empresa;
 	}
@@ -79,6 +83,15 @@ public class Oferta {
 
 	public void setDescripcio(String descripcio) {
 		this.descripcio = descripcio;
+	}
+	
+	public String getSector() {
+		return sector;
+	}
+
+
+	public void setSector(String sector) {
+		this.sector = sector;
 	}
 
 

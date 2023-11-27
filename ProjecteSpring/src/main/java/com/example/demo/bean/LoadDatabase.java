@@ -22,9 +22,9 @@ class LoadDatabase {
         empresaRepository.save(empresa2);
 
         // Use the saved empresas to create ofertas
-        Oferta oferta1 = new Oferta("Activa", "programador", "Descripción ", fechaRegistro, empresa1);
-        Oferta oferta2 = new Oferta("Activa", "sistemas", "Descripción ç", fechaRegistro, empresa1);
-        Oferta oferta3 = new Oferta("Pendiente", "programador", "Descripción a", fechaRegistro, empresa2);
+        Oferta oferta1 = new Oferta("Activa", "programador", "Descripción ","DAM", fechaRegistro, empresa1);
+        Oferta oferta2 = new Oferta("Activa", "sistemas", "Descripción ç","ASIX", fechaRegistro, empresa1);
+        Oferta oferta3 = new Oferta("Pendiente", "programador", "Descripción a","DAW", fechaRegistro, empresa2);
 
         // Save the ofertas
         ofertaRepository.save(oferta1);
