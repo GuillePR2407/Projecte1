@@ -24,7 +24,7 @@ public class Oferta {
     private String descripcio;
     
     @Column(name = "Sector", length = 20, nullable = false)
-    private String sector;
+    private Sector sector;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "REGIST_DATE", nullable = false)
@@ -36,7 +36,7 @@ public class Oferta {
 	
     public Oferta(){}
 
-	public Oferta(String status, String nom, String descripcio, String sector, Calendar registDate, Empresa empresa) {
+	public Oferta(String status, String nom, String descripcio, Sector sector, Calendar registDate, Empresa empresa) {
 		super();
 		this.status = status;
 		this.nom = nom;
@@ -85,12 +85,12 @@ public class Oferta {
 		this.descripcio = descripcio;
 	}
 	
-	public String getSector() {
+	public Sector getSector() {
 		return sector;
 	}
 
 
-	public void setSector(String sector) {
+	public void setSector(Sector sector) {
 		this.sector = sector;
 	}
 

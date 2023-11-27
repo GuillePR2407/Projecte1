@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import com.example.demo.bean.Empresa;
-import com.example.demo.bean.EmpresaRepository;
-import com.example.demo.bean.Oferta;
-import com.example.demo.bean.OfertaRepository;
+import com.example.demo.bean.*;
 
 @DataJpaTest
 public class OfertaRepositoryTest {
@@ -32,8 +29,8 @@ public class OfertaRepositoryTest {
         empresa = empresaRepository.save(empresa);
 
         // Crear ofertas asociadas a la empresa
-        Oferta oferta1 = new Oferta("Activa", "Oferta1", "Descripción1", Calendar.getInstance(), empresa);
-        Oferta oferta2 = new Oferta("Inactiva", "Oferta2", "Descripción2", Calendar.getInstance(), empresa);
+        Oferta oferta1 = new Oferta("Activa", "Oferta1", "Descripción1", Sector.DAM, Calendar.getInstance(), empresa);
+        Oferta oferta2 = new Oferta("Inactiva", "Oferta2", "Descripción2", Sector.DAW, Calendar.getInstance(), empresa);
         ofertaRepository.save(oferta1);
         ofertaRepository.save(oferta2);
 
