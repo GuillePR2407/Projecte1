@@ -29,7 +29,7 @@ class OfertaController {
     
     @GetMapping("/ofertas/nom/{nom}")
     List<Oferta> obtenerOfertasPorNombre(@PathVariable String nom) {
-        return ofertaRepository.findByNom(nom);
+        return ofertaRepository.findByNomLike("%"+nom+"%");
     }
 
     @GetMapping("/ofertas/sector/{sector}")

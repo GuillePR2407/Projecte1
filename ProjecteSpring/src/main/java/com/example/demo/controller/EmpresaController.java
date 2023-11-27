@@ -35,7 +35,7 @@ class EmpresaController {
     
     @GetMapping("/empresas/nom/{nom}")
     List<Empresa> obtenerEmpresasPorNom(@PathVariable String nom) {
-        return empresaRepository.findByNom(nom);
+        return empresaRepository.findByNomLike("%"+nom+"%");
     }
 
     @PostMapping("/empresas")
