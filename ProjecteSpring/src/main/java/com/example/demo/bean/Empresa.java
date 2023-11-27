@@ -15,8 +15,8 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOMBRE", nullable = false, length = 100)
-    private String nombre;
+    @Column(name = "NOM", nullable = false, length = 100)
+    private String nom;
 
     @Column(name = "DESCRIPCION", nullable = false, length = 100)
     private String descripcion;
@@ -37,9 +37,9 @@ public class Empresa {
    
     public Empresa() {}
     
-	public Empresa(String nombre, String descripcion) {
+	public Empresa(String nom, String descripcion) {
 		super();
-		this.nombre = nombre;
+		this.nom = nom;
 		this.descripcion = descripcion;
 	}
 
@@ -52,11 +52,11 @@ public class Empresa {
 	}
 
 	public String getNombre() {
-		return nombre;
+		return nom;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nom) {
+		this.nom = nom;
 	}
 
 	public String getDescripcion() {
@@ -83,18 +83,18 @@ public class Empresa {
 	    if (!(o instanceof Empresa))
 	      return false;
 	    Empresa empresa = (Empresa) o;
-	    return Objects.equals(this.id, empresa.id) && Objects.equals(this.nombre, empresa.nombre)
+	    return Objects.equals(this.id, empresa.id) && Objects.equals(this.nom, empresa.nom)
 	        && Objects.equals(this.descripcion, empresa.descripcion);
 	  }
 	
 	 @Override
 	  public int hashCode() {
-	    return Objects.hash(this.id, this.nombre, this.descripcion);
+	    return Objects.hash(this.id, this.nom, this.descripcion);
 	  }
 
 	  @Override
 	  public String toString() {
-	    return "Empresa{" + "id=" + this.id + ", nombre='" + this.nombre + '\'' + ", descripcion='" + this.descripcion + '\'' + '}';
+	    return "Empresa{" + "id=" + this.id + ", nom='" + this.nom + '\'' + ", descripcion='" + this.descripcion + '\'' + '}';
 	  }
 
     

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
 import com.example.demo.bean.Oferta;
+import com.example.demo.bean.Sector;
 import com.example.demo.bean.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
 import com.example.demo.exception.OfertaNotFoundException;
@@ -25,6 +26,16 @@ class OfertaController {
     List<Oferta> all() {
         return ofertaRepository.findAll();
     }
+    
+    @GetMapping("/ofertas/nom/{nom}")
+    List<Oferta> obtenerOfertasPorNombre(@PathVariable String nom) {
+        return ofertaRepository.findByNom(nom);
+    }
+
+    @GetMapping("/ofertas/sector/{sector}")
+    List<Oferta> obtenerOfertasPorSector(@PathVariable Sector sector) {
+        return ofertaRepository.findBySector(sector);
+    }
 
     @PostMapping("/ofertas")
     Oferta newOferta(@RequestBody Oferta newOferta) {
@@ -39,6 +50,7 @@ class OfertaController {
     Oferta one(@PathVariable Long id) {
         return ofertaRepository.findById(id).orElseThrow(() -> new OfertaNotFoundException(id));
     }
+    
 
     @GetMapping("/empresas/{empresaId}/ofertas")
     List<Oferta> obtenerOfertasPorEmpresa(@PathVariable Long empresaId) {
