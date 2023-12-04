@@ -1,13 +1,12 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Empresa;
 import com.example.demo.bean.EmpresaRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmpresaService {
