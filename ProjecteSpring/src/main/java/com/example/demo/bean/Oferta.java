@@ -33,9 +33,7 @@ public class Oferta {
     @JoinColumn(name = "EMPRESA", nullable = false)
     private Empresa empresa;
 	
-    public Oferta(){}
-
-	public Oferta(Status status, String nom, String descripcio, Sector sector, Calendar registDate, Empresa empresa) {
+    public Oferta(Status status, String nom, String descripcio, Sector sector, Calendar registDate, Empresa empresa) {
 		super();
 		this.status = status;
 		this.nom = nom;

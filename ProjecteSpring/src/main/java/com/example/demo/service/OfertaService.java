@@ -25,6 +25,7 @@ public class OfertaService {
         Empresa empresa = empresaRepository.findById(newOferta.getEmpresa())
         		.orElseThrow(() -> new EmpresaNotFoundException(newOferta.getEmpresa()));
 
+        empresa.addOferta(newOferta);
         newOferta.setEmpresa(empresa);
         return ofertaRepository.save(newOferta);
     }
@@ -32,6 +33,4 @@ public class OfertaService {
     public List<Oferta> getAllOfertas() {
         return ofertaRepository.findAll();
     }
-
-    // Otros métodos de servicio según sea necesario
 }

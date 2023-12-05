@@ -29,38 +29,30 @@ public class OfertaServiceTest {
 
     @Test
     public void testCreateOferta() {
-        // Configurar el comportamiento esperado del repositorio de empresa
-        Empresa empresa = new Empresa("Empresa de prueba", "Descripción de la empresa de prueba");
+        Empresa empresa = new Empresa("Empresa1", "Descripción1");
         when(empresaRepository.findById(Mockito.anyLong())).thenReturn(java.util.Optional.of(empresa));
 
-        // Configurar el comportamiento esperado del repositorio de oferta
         Oferta oferta = new Oferta(Status.ACTIVA, "Oferta de prueba", "Descripción de prueba", Sector.DAM, Calendar.getInstance(), empresa);
         when(ofertaRepository.save(Mockito.any(Oferta.class))).thenReturn(oferta);
 
-        // Llamar al método del servicio
-        Oferta createdOferta = ofertaService.createOferta(new Oferta());
+        Oferta createdOferta = ofertaService.createOferta(new Oferta(Status.INACTIVA, "Oferta 2", "Descripción 2", Sector.DAW, Calendar.getInstance(), empresa));
 
-        // Verificar que la oferta se haya creado correctamente
-        assertEquals("Activa", createdOferta.getStatus());
-        assertEquals("Oferta de prueba", createdOferta.getNom());
-        // Agregar más verificaciones según sea necesario
+        assertEquals(Status.INACTIVA, createdOferta.getStatus());
+        assertEquals("Oferta 2", createdOferta.getNom());
     }
 
     @Test
     public void testGetAllOfertas() {
-        Empresa empresa = new Empresa("Empresa de prueba", "Descripción de la empresa de prueba");
-        // Configurar el comportamiento esperado del repositorio de oferta
+        Empresa empresa = new Empresa("Empresa1", "Descripción1");
+        
         Oferta oferta1 = new Oferta(Status.ACTIVA, "Oferta 1", "Descripción 1", Sector.DAM, Calendar.getInstance(), empresa);
         Oferta oferta2 = new Oferta(Status.INACTIVA, "Oferta 2", "Descripción 2", Sector.DAW, Calendar.getInstance(), empresa);
+        
         when(ofertaRepository.findAll()).thenReturn(Arrays.asList(oferta1, oferta2));
 
-        // Llamar al método del servicio
         List<Oferta> allOfertas = ofertaService.getAllOfertas();
 
-        // Verificar que se hayan recuperado correctamente las ofertas
         assertEquals(2, allOfertas.size());
-        // Agregar más verificaciones según sea necesario
+        
     }
-
-    // Agregar más pruebas según sea necesario
 }

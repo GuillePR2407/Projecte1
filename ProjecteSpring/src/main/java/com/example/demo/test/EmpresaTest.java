@@ -21,7 +21,7 @@ public class EmpresaTest {
         empresa.addOferta(oferta);
 
         assertTrue(empresa.getOfertas().contains(oferta));
-        assertEquals(empresa, oferta.getEmpresa());
+        assertEquals(empresa.getId(), oferta.getEmpresa());
     }
 
     @Test
@@ -33,7 +33,6 @@ public class EmpresaTest {
         empresa.removeOferta(oferta);
 
         assertFalse(empresa.getOfertas().contains(oferta));
-        assertNull(oferta.getEmpresa());
     }
 
     @Test

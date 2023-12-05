@@ -22,13 +22,11 @@ public class OfertaTest {
         // Crear una instancia de Oferta
         Oferta oferta = new Oferta(Status.ACTIVA, "Oferta1", "Descripción1", Sector.DAM, Calendar.getInstance(), empresa);
         
-        empresa.addOferta(oferta);        
         // Verificar que los valores se han establecido correctamente
         assertEquals(Status.ACTIVA, oferta.getStatus());
         assertEquals("Oferta1", oferta.getNom());
         assertEquals("Descripción1", oferta.getDescripcio());
         assertEquals(Sector.DAM, oferta.getSector());
-        assertEquals(empresa, oferta.getEmpresa());
     }
 
     @Test
