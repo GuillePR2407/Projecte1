@@ -43,6 +43,10 @@ public class Oferta {
 		this.empresa = empresa;
 	}
 
+	public Oferta() {
+
+	}
+
 	public Long getId() {
 		return id;
 	}

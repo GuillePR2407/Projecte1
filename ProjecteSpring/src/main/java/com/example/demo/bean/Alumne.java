@@ -3,7 +3,7 @@ package com.example.demo.bean;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USUARIOS_ADMINISTRADORES")
+@Table(name = "USUARIOS_ALUMNOS")
 public class Alumne {
 
     @Id
@@ -20,8 +20,6 @@ public class Alumne {
     @Column(name = "CLAVE", nullable = false, length = 100)
     private String clave;
 
-    
-    
 	public String getNombre() {
 		return nombre;
 	}
@@ -45,5 +43,4 @@ public class Alumne {
 	public void setClave(String clave) {
 		this.clave = clave;
 	}
-
-}
+								}

@@ -8,12 +8,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Calendar;
 
 @Configuration
-class LoadDatabase {
+public class LoadDatabase {
     Calendar fechaRegistro = Calendar.getInstance();
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(EmpresaRepository empresaRepository, OfertaRepository ofertaRepository) {
+    public CommandLineRunner initDatabase(EmpresaRepository empresaRepository, OfertaRepository ofertaRepository) {
         Empresa empresa1 = new Empresa("Giyesl", "klklklklkl");
         Empresa empresa2 = new Empresa("fransl", "klklklklkl");
         Empresa empresa3 = new Empresa("fransl", "tonto");
