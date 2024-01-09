@@ -15,16 +15,19 @@ public class SecurityConfig{
     @Bean
     public UserDetailsService userDetailsService() {
         var userDetailsService = new InMemoryUserDetailsManager();
+        
         UserDetails user1 = User.builder()
                 .username("postman")
                 .password(this.passwordEncoder().encode("admin"))
                 .authorities("read")
                 .build();
+        
         UserDetails user2 = User.builder()
                 .username("browser")
                 .password(this.passwordEncoder().encode("admin"))
                 .authorities("read")
                 .build();
+        
         userDetailsService.createUser(user1);
         userDetailsService.createUser(user2);
         return userDetailsService;
