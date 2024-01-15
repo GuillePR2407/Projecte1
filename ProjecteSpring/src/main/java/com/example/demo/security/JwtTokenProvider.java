@@ -50,7 +50,7 @@ public class JwtTokenProvider {
                     .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                     .build();
 
-            validator.parseClaimsJwt(token);
+            validator.parseClaimsJws(token);
             return true;
         } catch (SignatureException e) {
             log.info("Error en la firma del token", e);
