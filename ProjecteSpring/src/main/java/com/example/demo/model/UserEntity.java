@@ -32,6 +32,17 @@ public class UserEntity implements UserDetails {
                 .toList();
     }
 
+    public UserEntity() {
+    }
+
+    public UserEntity(Long id, String username, String password, String email, List<UserAuthority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+    }
+
     @Override
     public String getPassword() {
         return this.password;
@@ -44,17 +55,17 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

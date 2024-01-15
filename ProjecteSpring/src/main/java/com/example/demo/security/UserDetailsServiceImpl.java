@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
@@ -18,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.debug("loadUserByUSername {}", username);
+        log.debug("loadUserByUsername {}", username);
         return this.userService.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException(username + " no encontrado")
         );

@@ -27,12 +27,14 @@ public class JwtTokenProvider {
     public String generateToken(Authentication authentication){
         UserEntity user = (UserEntity) authentication.getPrincipal();
 
+        long expirationMillis = System.currentTimeMillis() + Long.parseLong(jwtDurationSeconds) * 1000;
+
         return Jwts.builder()
                 .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()), SignatureAlgorithm.HS512)
                 .setHeaderParam("typ","JWT")
                 .setSubject(Long.toString(user.getId()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + (jwtDurationSeconds  + 1000)))
+                .setExpiration(new Date(expirationMillis))
                 .claim("username", user.getUsername())
                 .claim("email", user.getEmail())
                 .compact();
@@ -40,12 +42,14 @@ public class JwtTokenProvider {
     }
 
     public boolean isValidToken(String token){
-        if (!StringUtils.hasLength(token)) return false;
+        if (!StringUtils.hasLength(token))
+            return false;
 
         try{
-            JwtParser validator = Jwts.parserBuilder()
+            JwtParser validator = Jwts.parser()
                     .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                     .build();
+
             validator.parseClaimsJwt(token);
             return true;
         } catch (SignatureException e) {
@@ -56,6 +60,15 @@ public class JwtTokenProvider {
             log.info("Token expirado", e);
         }
         return false;
+    }
+
+    public String getUsernameFromToken(String token) {
+        JwtParser parser = Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build();
+
+        Claims claims = parser.parseClaimsJws(token).getBody();
+        return claims.get("username").toString();
     }
 
 }
