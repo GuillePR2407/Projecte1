@@ -1,5 +1,7 @@
 package com.example.demo.bean;
 
+import com.example.demo.repository.EmpresaRepository;
+import com.example.demo.repository.OfertaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

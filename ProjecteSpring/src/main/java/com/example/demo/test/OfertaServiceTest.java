@@ -1,6 +1,8 @@
 package com.example.demo.test;
 
 import com.example.demo.bean.*;
+import com.example.demo.repository.EmpresaRepository;
+import com.example.demo.repository.OfertaRepository;
 import com.example.demo.service.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import com.example.demo.bean.Empresa;
-import com.example.demo.bean.EmpresaRepository;
+import com.example.demo.repository.EmpresaRepository;
 
 @DataJpaTest
 public class EmpresaRepositoryTest {

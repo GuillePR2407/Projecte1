@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Empresa;
-import com.example.demo.bean.EmpresaRepository;
+import com.example.demo.repository.EmpresaRepository;
 import com.example.demo.bean.Oferta;
-import com.example.demo.bean.OfertaRepository;
+import com.example.demo.repository.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
 
 @Service

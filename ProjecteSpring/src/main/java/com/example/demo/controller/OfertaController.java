@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.bean.Empresa;
-import com.example.demo.bean.EmpresaRepository;
+import com.example.demo.repository.EmpresaRepository;
 import com.example.demo.bean.Oferta;
 import com.example.demo.bean.Sector;
-import com.example.demo.bean.OfertaRepository;
+import com.example.demo.repository.OfertaRepository;
 import com.example.demo.exception.EmpresaNotFoundException;
 import com.example.demo.exception.OfertaNotFoundException;
 

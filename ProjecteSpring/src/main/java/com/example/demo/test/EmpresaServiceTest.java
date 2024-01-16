@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.example.demo.bean.Empresa;
-import com.example.demo.bean.EmpresaRepository;
+import com.example.demo.repository.EmpresaRepository;
 import com.example.demo.service.EmpresaService;
 
 @SpringBootTest

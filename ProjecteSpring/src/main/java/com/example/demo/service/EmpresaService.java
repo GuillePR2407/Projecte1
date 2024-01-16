@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Empresa;
-import com.example.demo.bean.EmpresaRepository;
+import com.example.demo.repository.EmpresaRepository;
 
 @Service
 public class EmpresaService {

@@ -1,7 +1,9 @@
-package com.example.demo.bean;
+package com.example.demo.repository;
 
 import java.util.List;
 
+import com.example.demo.bean.Oferta;
+import com.example.demo.bean.Sector;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
