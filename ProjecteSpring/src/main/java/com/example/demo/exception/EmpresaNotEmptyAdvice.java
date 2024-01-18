@@ -14,5 +14,4 @@ public class EmpresaNotEmptyAdvice {
     String empresaNotEmptyHandler(EmpresaNotEmptyException ex) {
         return ex.getMessage();
     }
-
 }

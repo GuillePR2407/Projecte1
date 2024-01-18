@@ -37,14 +37,14 @@ public class SecurityConfig{
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.authorizeHttpRequests()
-                .mvcMatchers("/auth/**").permitAll()
-                .anyRequest()
-                .authenticated();
-
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()  // Allowing access to H2 console and OpenAPI resources
+                .anyRequest().authenticated()
+                .and()
+                .headers().frameOptions().disable()  // Disable X-Frame-Options to enable embedding in an iframe (if needed)
+                .and()
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
