@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.exception.EmpresaCantDeleteAdvice;
+import com.example.demo.exception.EmpresaNotEmptyException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,13 @@ class EmpresaController {
         return empresaRepository.findByNomLike("%"+nom+"%");
     }
 
+    /*
+        Creació d'una empresa
+        {
+            "nombre": String,
+            "descripcion": String
+        }
+     */
     @PostMapping("/empresas")
     Empresa newEmpresa(@RequestBody Empresa newEmpresa) {
         return empresaRepository.save(newEmpresa);
@@ -66,9 +75,11 @@ class EmpresaController {
        try {
             if (!empresaTieneOferta(id)) {
                 empresaRepository.deleteById(id);
+            } else {
+                throw new EmpresaCantDeleteException(id);
             }
-        } catch (Exception e) {   	
-            throw new EmpresaCantDeleteException(id);
+        } catch (EmpresaCantDeleteException e) {
+            throw new EmpresaNotEmptyException(id);
         }
     }
 

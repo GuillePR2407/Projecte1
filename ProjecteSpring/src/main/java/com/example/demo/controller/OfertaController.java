@@ -37,6 +37,19 @@ class OfertaController {
         return ofertaRepository.findBySector(sector);
     }
 
+    /*
+        Creació d'una oferta
+    {
+        "status": enum(Status),
+        "nom": String,
+        "descripcio": String,
+        "sector": enum(Sector),
+        "registDate": DATE,
+        "empresa":{
+            "id": int
+        }
+    }
+     */
     @PostMapping("/ofertas")
     Oferta newOferta(@RequestBody Oferta newOferta) {
         Empresa empresa = empresaRepository.findById(newOferta.getEmpresa())
