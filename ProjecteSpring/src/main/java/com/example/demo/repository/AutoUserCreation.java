@@ -45,35 +45,31 @@ public class AutoUserCreation {
     }
 
     public void autenticarYGenerarToken() {
-        // Crear un usuario de ejemplo con contraseña codificada
         UserDetails userDetails = createUserDetails();
 
         try {
-            // Crear una solicitud de autenticación con la contraseña codificada
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword()));
+                    new UsernamePasswordAuthenticationToken(userDetails.getUsername(), "admin"));
 
-            // Establecer la autenticación en el contexto de seguridad
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Generar el token
             String token = generateToken(userDetails);
 
-            // Devolver el token por la consola de Spring Boot
-            System.out.println("Token del usuario " + userDetails.getUsername() + ": " + token);
+            System.out.println("Authentication successful for user: " + userDetails.getUsername());
+            System.out.println("Token for user " + userDetails.getUsername() + ": " + token);
+
         } catch (AuthenticationException e) {
-            // Manejar la excepción de autenticación (credenciales incorrectas, cuenta bloqueada, etc.)
-            System.err.println("Error durante la autenticación: " + e.getMessage());
+            System.err.println("Error during authentication: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     private UserDetails createUserDetails() {
-        // Puede personalizar esta parte según sus necesidades, por ejemplo, cargar el usuario desde la base de datos
-        String rawPassword = "admin"; // Contraseña sin codificar
-        String encodedPassword = passwordEncoder.encode(rawPassword); // Codificar la contraseña
+        // Customize this part according to your needs, e.g., load the user from the database
+        String rawPassword = "admin"; // Plain text password
+        String encodedPassword = passwordEncoder.encode(rawPassword); // Encode the password
 
-        return new UserEntity(1L, "admin", encodedPassword,
-                "admin@admin.com", null);
+        return new UserEntity(1L, "admin", encodedPassword, "admin@admin.com", null);
     }
 
     private String generateToken(UserDetails userDetails) {

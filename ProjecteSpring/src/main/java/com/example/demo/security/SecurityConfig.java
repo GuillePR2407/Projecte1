@@ -39,7 +39,7 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()  // Allowing access to H2 console and OpenAPI resources
+                .antMatchers("/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**", "/auth/**").permitAll()  // Allowing access to H2 console and OpenAPI resources
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable()  // Disable X-Frame-Options to enable embedding in an iframe (if needed)
